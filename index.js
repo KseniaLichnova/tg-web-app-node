@@ -50,7 +50,7 @@ bot.on('message', async (msg) => {
   }
 });
 
-app.post('web-data', async (req, res ) => {
+app.post('/web-data', async (req, res ) => {
     const {queryId, products = [], totalPrice} = req.body;
     try {
         await bot.answerWebAppQuery(queryId,{
@@ -61,13 +61,7 @@ app.post('web-data', async (req, res ) => {
         })
         return res.status(200).json({});
     } catch (e) {
-        await bot.answerWebAppQuery(queryId,{
-            type: 'article',
-            id: queryId,
-            title: 'Не удалось приобрести товар',
-            input_message_content: {message_text: 'Не удалось приобрести товар'}
-        })
-          return res.status(500).json({})
+        return res.status(500).json({})
     }
 })
 

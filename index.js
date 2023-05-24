@@ -36,7 +36,6 @@ bot.on('message', async (msg) => {
       try {
           const  data = JSON.parse(msg?.web_app_data?.data)
           console.log(data)
-
           await bot.sendMessage(chatId,'Спасибо за обратную связь!')
           await bot.sendMessage(chatId,'Ваша страна: ' + data?.country);
           await bot.sendMessage(chatId,'Ваша улица: ' + data?.street);
@@ -47,13 +46,12 @@ bot.on('message', async (msg) => {
           }, 3000)
       } catch (e) {
           console.log(e);
-
       }
   }
 });
 
-app.post('web-data', async (req , res ) => {
-    const {queryId, products, totalPrice} = req.body;
+app.post('/web-data', async (req, res ) => {
+    const {queryId, products = [], totalPrice} = req.body;
     try {
         await bot.answerWebAppQuery(queryId,{
             type: 'article',
@@ -69,8 +67,8 @@ app.post('web-data', async (req , res ) => {
             title: 'Не удалось приобрести товар',
             input_message_content: {message_text: 'Не удалось приобрести товар'}
         })
+          return res.status(500).json({})
     }
-         return res.status(500).json({})
 })
 
 const PORT = 8000;

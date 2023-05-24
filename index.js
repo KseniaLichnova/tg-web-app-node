@@ -52,8 +52,8 @@ bot.on('message', async (msg) => {
   }
 });
 
-app.post('/web-data', async (req, res) => {
-    const {queryId, products, totalPrice} =req.body;
+app.post('web-data', async (req , res ) => {
+    const {queryId, products, totalPrice} = req.body;
     try {
         await bot.answerWebAppQuery(queryId,{
             type: 'article',
@@ -70,7 +70,7 @@ app.post('/web-data', async (req, res) => {
             input_message_content: {message_text: 'Не удалось приобрести товар'}
         })
     }
-    return res.status(500).json({})
+         return res.status(500).json({})
 })
 
 const PORT = 8000;

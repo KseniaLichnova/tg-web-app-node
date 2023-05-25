@@ -1,6 +1,6 @@
 const TelegramBot = require('node-telegram-bot-api');
 const express = require('express');
-const cors =require('cors');
+const cors = require('cors');
 
 const token = '6159524973:AAFs833uzoc03WXBaMCiUHX7sAQo6Cn9ud4';
 const webAppUrl = 'https://preeminent-crisp-b59238.netlify.app/';
@@ -50,7 +50,7 @@ bot.on('message', async (msg) => {
     }
 });
 
-app.post('web-data', async (req, res) => {
+app.post('/web-data', async (req, res) => {
     const {queryId, products = [], totalPrice} = req.body;
     try {
         await bot.answerWebAppQuery(queryId, {
